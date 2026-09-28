@@ -19,6 +19,7 @@ import java.util.Calendar;
  */
 public class ReminderReceiver extends BroadcastReceiver {
     static final String CHANNEL = "hatirlatma";
+    static final String BACKUP_CHANNEL = "yedekleme";
     static final String[] ALL = { "sabah", "aksam" };
 
     private static SharedPreferences prefs(Context c) {
@@ -87,4 +88,27 @@ public class ReminderReceiver extends BroadcastReceiver {
                 .build();
         nm.notify(sabah ? 1 : 2, n);
     }
+    static void postBackup(Context c, boolean ok, String text) {
+        NotificationManager nm = c.getSystemService(NotificationManager.class);
+        if (nm == null) return;
+        if (Build.VERSION.SDK_INT >= 26) {
+            NotificationChannel ch = new NotificationChannel(BACKUP_CHANNEL, "Yedekleme bildirimleri",
+                    NotificationManager.IMPORTANCE_LOW);
+            ch.setDescription("Satış kayıtlarının otomatik yedekleme durumu");
+            nm.createNotificationChannel(ch);
+        }
+        Intent open = new Intent(c, MainActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent tap = PendingIntent.getActivity(c, 90, open,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        Notification n = new Notification.Builder(c, BACKUP_CHANNEL)
+                .setSmallIcon(c.getResources().getIdentifier("ic_notif", "drawable", c.getPackageName()))
+                .setContentTitle(ok ? "Yedekleme tamamlandı" : "Yedekleme uyarısı")
+                .setContentText(text)
+                .setAutoCancel(true)
+                .setContentIntent(tap)
+                .build();
+        nm.notify(90, n);
+    }
+
 }
