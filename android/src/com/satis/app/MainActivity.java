@@ -53,10 +53,10 @@ import java.util.zip.GZIPOutputStream;
 
 /**
  * Hosts the Cariler web UI (assets/index.html) and keeps its data safe:
- *  - every save is written atomically to files/cariler.json
+ *  - every save is written atomically to files/satis.json
  *  - hourly (and before deletes/restores) gzip snapshots in files/yedekler; snapshots are never deleted
  *  - Download/Satış: the latest copy plus one archive file per month, surviving uninstall (Android 10+)
- *  - cariler.json goes into Android's Google backup; phone-to-phone transfer carries everything
+ *  - satis.json and the snapshots go into Android's Google backup; phone-to-phone transfer carries everything
  */
 public class MainActivity extends Activity {
     private static final int REQ_SAVE = 11, REQ_OPEN = 12;
