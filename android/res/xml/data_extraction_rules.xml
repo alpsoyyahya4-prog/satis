@@ -3,6 +3,7 @@
 <data-extraction-rules>
     <cloud-backup>
         <include domain="file" path="cariler.json" />
+        <include domain="file" path="yedekler" />
         <include domain="sharedpref" path="." />
     </cloud-backup>
     <device-transfer>
