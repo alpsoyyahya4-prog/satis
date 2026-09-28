@@ -3,7 +3,7 @@
 #   ... -File build.ps1 -WebOnly                                  -> build\web\index.html only
 #   ... -File build.ps1 -Install                                  -> also installs on the USB-connected phone
 # Raise -VersionCode for every new release; keep android\satis.keystore, updates must be signed with it.
-param([switch]$WebOnly, [switch]$Install, [int]$VersionCode = 3, [string]$VersionName = '1.2')
+param([switch]$WebOnly, [switch]$Install, [int]$VersionCode = 4, [string]$VersionName = '1.3')
 $ErrorActionPreference = 'Stop'
 $root = $PSScriptRoot
 $sdk = Join-Path $env:LOCALAPPDATA 'Android\Sdk'
