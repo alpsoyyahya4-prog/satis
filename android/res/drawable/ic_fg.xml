@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Satış markası: S harfi ve yükselen satış oku -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path android:fillColor="#F7F4EA"
+        android:pathData="M40,23 L68,23 A17,17 0,0 1,85,40 L85,68 A17,17 0,0 1,68,85 L40,85 A17,17 0,0 1,23,68 L23,40 A17,17 0,0 1,40,23 Z" />
+    <path android:fillColor="#00000000" android:strokeColor="#0B4650" android:strokeWidth="5"
+        android:strokeLineCap="round" android:strokeLineJoin="round"
+        android:pathData="M67,40 C63,36 58,34 51,34 C42,34 36,38 36,44 C36,51 42,53 52,55 C62,57 68,60 68,68 C68,75 62,80 51,80 C43,80 36,77 31,72" />
+    <path android:fillColor="#00000000" android:strokeColor="#E9B04E" android:strokeWidth="4.5"
+        android:strokeLineCap="round" android:strokeLineJoin="round"
+        android:pathData="M34,70 L49,55 L59,64 L78,41 M67,41 L78,41 L78,52" />
+</vector>
