@@ -8,7 +8,13 @@ $ErrorActionPreference = 'Stop'
 $root = $PSScriptRoot
 $sdk = Join-Path $env:LOCALAPPDATA 'Android\Sdk'
 $bt = Join-Path $sdk 'build-tools\36.0.0'
-$androidJar = Join-Path $sdk 'platforms\android-37.0\android.jar'
+$androidJars = @(
+    (Join-Path $sdk 'platforms\android-37.2\android.jar'),
+    (Join-Path $sdk 'platforms\android-37.0\android.jar'),
+    (Join-Path $sdk 'platforms\android-36\android.jar')
+)
+$androidJar = $androidJars | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
+if (-not $androidJar) { throw 'Android SDK platform 37.2, 37.0 veya 36 bulunamadı.' }
 $env:JAVA_HOME = 'C:\Program Files\Android\Android Studio\jbr'
 $env:Path = "$env:JAVA_HOME\bin;$env:Path"
 $out = Join-Path $root 'build'
