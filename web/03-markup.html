@@ -1,0 +1,69 @@
+
+<div id="splash" aria-hidden="true">
+  <svg class="sp-mark" viewBox="0 0 108 108" role="img" aria-label="Satış">
+    <rect class="sp-card" x="23" y="23" width="62" height="62" rx="17"/>
+    <path class="sp-s" pathLength="1" d="M67 40c-4-4-9-6-16-6-9 0-15 4-15 10 0 7 6 9 16 11 10 2 16 5 16 13 0 7-6 12-17 12-8 0-15-3-20-8"/>
+    <path class="sp-arrow" pathLength="1" d="M34 70 49 55l10 9 19-23M67 41h11v11"/>
+  </svg>
+  <div class="sp-name">Satış</div>
+  <div class="sp-sub">Cari ve kumaş fiyat takibi</div>
+</div>
+  <div class="sp-sub">Cari ve kumaş fiyat takibi</div>
+</div>
+
+<div class="app" id="app" lang="tr">
+  <header class="top main" id="top"><div class="tt"><h1>Cariler</h1><div class="sub">Yükleniyor…</div></div></header>
+  <div class="search" id="searchWrap" hidden>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+    <input id="q" type="search" placeholder="Ara" autocomplete="off" enterkeyhint="search" aria-label="Ara">
+    <button class="clr" id="qClear" type="button" aria-label="Aramayı temizle" hidden><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <main id="view"></main>
+</div>
+
+<button class="fab" id="fab" type="button" data-act="add" hidden></button>
+
+<div class="tabbar" lang="tr">
+  <nav aria-label="Bölümler">
+    <a class="tab" id="tab-cariler" href="#/">
+      <span class="pi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v10h16V10M3 10l2-6h14l2 6zM9 20v-6h6v6"/></svg></span>
+      <span>Cariler</span>
+    </a>
+    <a class="tab" id="tab-kumaslar" href="#/kumaslar">
+      <span class="pi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="7" cy="12" rx="3.5" ry="8"/><path d="M7 4h10.5a3.5 8 0 0 1 0 16H7"/><circle cx="7" cy="12" r="1"/></svg></span>
+      <span>Kumaşlar</span>
+    </a>
+    <a class="tab" id="tab-ayarlar" href="#/ayarlar">
+      <span class="pi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></span>
+      <span>Ayarlar</span>
+    </a>
+  </nav>
+</div>
+
+<dialog class="sheet" id="sheet" lang="tr" aria-labelledby="sheetTitle">
+  <form id="sheetForm" novalidate>
+    <span class="grab" aria-hidden="true"></span>
+    <header id="sheetHead">
+      <h3 id="sheetTitle"></h3>
+      <button class="icon-btn" type="button" data-act="close-sheet" aria-label="Kapat"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </header>
+    <div class="body" id="sheetBody"></div>
+    <footer>
+      <button class="btn danger" id="sheetDanger" type="button" hidden></button>
+      <button class="btn primary" id="sheetSubmit" type="submit">Kaydet</button>
+    </footer>
+  </form>
+</dialog>
+
+<dialog class="alert" id="confirm" lang="tr" aria-labelledby="confirmTitle">
+  <div class="wrap">
+    <header><h3 id="confirmTitle"></h3></header>
+    <div class="body"><p id="confirmText"></p></div>
+    <footer>
+      <button class="btn" id="confirmNo" type="button">Vazgeç</button>
+      <button class="btn danger" id="confirmYes" type="button">Sil</button>
+    </footer>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite" popover="manual" hidden></div>
