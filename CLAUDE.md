@@ -1,7 +1,7 @@
 # Satış — proje notları
 
 Bu depo, Yahya'nın kumaş alımı için kullandığı **Satış** adlı Android uygulamasıdır
-(paket adı `com.cariler.app`). Bu dosya, yeni bir oturumda her şeyi bilmen içindir.
+(paket adı `com.satis.app`). Bu dosya, yeni bir oturumda her şeyi bilmen içindir.
 
 ## Kullanıcıyla konuşma
 
@@ -19,7 +19,7 @@ Bu depo, Yahya'nın kumaş alımı için kullandığı **Satış** adlı Android
 - **Kumaş sayfası**: güncel fiyat, değişim yüzdesi, basamaklı fiyat grafiği, fiyat geçmişi,
   aynı kumaşın diğer carilerdeki fiyatları.
 - **Ayarlar**: yedekleme, Silinenler, telefon değiştirme, tema, animasyon, hatırlatmalar, Excel'e aktarma.
-- Açılışta kısa bir animasyon (etiket sallanır, altın dikiş çizilir, "Satış" yazısı belirir).
+- Açılışta kısa bir animasyon (S harfi ve yükselen satış oku çizilir, "Satış" yazısı belirir).
 - Fiyatlar etiket görünümünde: rakam kalın, ₺ ve kuruş daha küçük.
 
 ## Değişmez kurallar (kullanıcının açık isteği)
@@ -62,23 +62,23 @@ versionCode artmalı.
 Bulut ortamında (Linux) SDK yok. Derleme gerekirse JDK 17+, Android command-line tools,
 `build-tools;36.0.0` ve `platforms;android-37` kurup `build.ps1`in adımlarını bash'e çevir.
 
-**İmza:** `android/cariler.keystore`, alias `cariler`, parola `cariler-app`. Her sürüm bununla
+**İmza:** `android/satis.keystore`, alias `satis`, parola `satis-app`. Her sürüm bununla
 imzalanmalı, yoksa telefona güncelleme olarak kurulamaz ve kullanıcının verileri risk altına girer.
 
 ## Yeni sürümü kullanıcıya ulaştırma
 
-- Bilgisayar açıksa: telefon kabloyla takılı, `adb install -r Satış.apk`.
+- Bilgisayar açıksa: telefon kabloyla takılı, `adb install -r Satis.apk`.
 - Bulutta: APK'yı kullanıcıya dosya olarak gönder; telefonda dosyaya dokunup kurar
   ("Bilinmeyen uygulamalara izin ver" çıkarsa izin verir). Kurulum güncelleme olur, veriler kalır.
 
 ## Veri dosyası biçimi (yedekler de bu biçimde)
 
 ```json
-{ "app": "cariler", "v": 1, "savedAt": "ISO tarih",
+{ "app": "satis", "v": 1, "savedAt": "ISO tarih",
   "cariler": [ { "id", "ad", "yetkili", "telefon", "not", "olusturma", "guncelleme", "silindi?" } ],
   "kumaslar": [ { "id", "cariId", "ad", "kod", "para": "TRY|USD|EUR", "birim": "mt|kg|adet|top|yard",
                   "not", "fiyatlar": [ { "id", "f": 272.5, "t": "2026-09-16", "n": "not", "silindi?" } ] } ] }
 ```
 
-Telefonda: ana dosya `files/cariler.json`, yedekler `files/yedekler/*.json.gz`,
-dışarıdaki kopya `İndirilenler/Satış/maliyet-otomatik-yedek.json` + `Arsiv/maliyet-YYYY-MM.json`.
+Telefonda: ana dosya `files/satis.json`, yedekler `files/yedekler/*.json.gz`,
+dışarıdaki kopya `İndirilenler/Satış/satis-otomatik-yedek.json` + `Arsiv/satis-YYYY-MM.json`.
