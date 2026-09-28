@@ -1,0 +1,13 @@
+# derleme çıktıları
+build/
+*.apk
+*.zip
+
+# telefondan alınan yedekler: kendi cari ve fiyat bilgilerin, buluta gitmesin
+telefon-yedekleri/
+
+.claude/settings.local.json
+
+# baska proje: bu depoya dahil degil
+ders-platformu/
+*.idsig
