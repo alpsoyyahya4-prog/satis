@@ -61,6 +61,7 @@ import java.util.zip.GZIPOutputStream;
 public class MainActivity extends Activity {
     private static final int REQ_SAVE = 11, REQ_OPEN = 12;
     private static final long SNAP_EVERY = 60L * 60 * 1000;
+    private static final long BACKUP_NOTICE_EVERY = 6L * 60 * 60 * 1000;
     private static final String MIRROR_NAME = "satis-otomatik-yedek.json";
 
     private final Object lock = new Object();
@@ -307,11 +308,27 @@ public class MainActivity extends Activity {
             SharedPreferences p = prefs();
             Uri u = keepWriting(p, "mirrorUri", MIRROR_NAME, "", json);
             String month = new SimpleDateFormat("yyyy-MM", Locale.US).format(new Date());
-            keepWriting(p, "arsiv-" + month, "satis-" + month + ".json", "/Arsiv", json);
-            if (u == null) return;
-            lastMirror = System.currentTimeMillis();
+            Uri archive = keepWriting(p, "arsiv-" + month, "satis-" + month + ".json", "/Arsiv", json);
+            long now = System.currentTimeMillis();
+            boolean complete = u != null && archive != null;
+            if (!complete) {
+                long lastNotice = p.getLong("backupErrorNoticeTime", 0L);
+                if (now - lastNotice >= BACKUP_NOTICE_EVERY) {
+                    p.edit().putLong("backupErrorNoticeTime", now).apply();
+                    ReminderReceiver.postBackup(this, false,
+                            "İndirilenler/Satış yedeği tamamlanamadı; uygulama içi yedeklerin korunuyor.");
+                }
+                return;
+            }
+            lastMirror = now;
             mirrorDirty = false;
             p.edit().putLong("mirrorTime", lastMirror).apply();
+            long lastNotice = p.getLong("backupNoticeTime", 0L);
+            if (now - lastNotice >= BACKUP_NOTICE_EVERY) {
+                p.edit().putLong("backupNoticeTime", now).apply();
+                ReminderReceiver.postBackup(this, true,
+                        "Güncel kopya ve aylık arşiv güvenle kaydedildi.");
+            }
         }
     }
 
