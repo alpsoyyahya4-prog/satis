@@ -62,7 +62,7 @@ versionCode artmalı.
 Bulut ortamında (Linux) SDK yok. Derleme gerekirse JDK 17+, Android command-line tools,
 `build-tools;36.0.0` ve `platforms;android-37` kurup `build.ps1`in adımlarını bash'e çevir.
 
-**İmza:** `android/satis.keystore`, alias `satis`, parola `satis-app`. Her sürüm bununla
+**İmza:** `android/satis.keystore`, alias `satis`, parola `satis-app`. Dosya yoksa `build.ps1` ilk derlemede oluşturur; her sürüm aynı dosyayla
 imzalanmalı, yoksa telefona güncelleme olarak kurulamaz ve kullanıcının verileri risk altına girer.
 
 ## Yeni sürümü kullanıcıya ulaştırma
