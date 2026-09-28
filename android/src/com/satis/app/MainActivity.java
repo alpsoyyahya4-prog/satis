@@ -405,6 +405,30 @@ public class MainActivity extends Activity {
         } catch (IOException e) { return ""; }
     }
 
+    /** Accept only a complete data document; this prevents a partial/corrupt write replacing real records. */
+    private static boolean validData(String json) {
+        if (json == null || json.isEmpty()) return false;
+        try {
+            JSONObject d = new JSONObject(json);
+            return d.optJSONArray("cariler") != null && d.optJSONArray("kumaslar") != null;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /** If the primary file is missing or damaged, restore the newest readable snapshot before the page opens. */
+    private String loadSafe() {
+        String current = readFile(dataFile());
+        if (validData(current)) return current;
+        for (File f : snapshots()) {
+            String candidate = readSnapshot(f);
+            if (!validData(candidate)) continue;
+            try { writeAtomic(dataFile(), candidate); } catch (Exception ignored) { }
+            return candidate;
+        }
+        return "";
+    }
+
     private static byte[] readAll(InputStream in, int max) throws IOException {
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         byte[] buf = new byte[16384];
@@ -422,15 +446,20 @@ public class MainActivity extends Activity {
 
     public class Bridge {
         @JavascriptInterface
-        public String load() { synchronized (lock) { return readFile(dataFile()); } }
+        public String load() { synchronized (lock) { return loadSafe(); } }
 
         @JavascriptInterface
         public boolean save(String json) {
+            if (!validData(json)) return false;
             try {
                 synchronized (lock) {
-                    writeAtomic(dataFile(), json);
                     File[] snaps = snapshots();
-                    if (snaps.length == 0 || System.currentTimeMillis() - snaps[0].lastModified() > SNAP_EVERY) writeSnapshot("oto", json);
+                    // Keep a complete compressed copy before replacing the primary file.
+                    if (snaps.length == 0 || System.currentTimeMillis() - snaps[0].lastModified() > SNAP_EVERY) {
+                        writeSnapshot("oto", json);
+                    }
+                    writeAtomic(dataFile(), json);
+                    if (!validData(readFile(dataFile()))) return false;
                 }
             } catch (Exception e) { return false; }
             mirrorDirty = true;
@@ -443,7 +472,7 @@ public class MainActivity extends Activity {
             try {
                 synchronized (lock) {
                     String cur = readFile(dataFile());
-                    if (cur.isEmpty()) return false;
+                    if (!validData(cur)) return false;
                     writeSnapshot(clean(tag), cur);
                 }
                 return true;
