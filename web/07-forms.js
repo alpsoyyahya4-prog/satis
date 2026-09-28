@@ -406,7 +406,7 @@ function runSplash() {
   const sp = $('#splash');
   if (!sp) return;
   if (!pref.anim || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) { sp.remove(); return; }
-  if (NB && NB.setBars) { try { NB.setBars('#24337F', '#24337F', true); } catch { /* old bridge */ } }
+  if (NB && NB.setBars) { try { NB.setBars('#0B4650', '#0B4650', true); } catch { /* old bridge */ } }
   const done = () => {
     if (!sp.isConnected) return;
     sp.remove(); syncBars();
