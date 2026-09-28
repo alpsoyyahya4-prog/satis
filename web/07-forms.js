@@ -269,6 +269,7 @@ async function deletePrice(k, key) {
   if (!e) return;
   const ok = await confirmBox('Fiyat silinsin mi?', `${dfLong.format(parseDay(e.t))} tarihli ${money(e.f, k.para)} fiyatı Silinenler’e taşınır. İstediğin zaman geri alabilirsin.`, 'Sil');
   if (!ok) return;
+  snapshotNow('silme');
   const now = findKumas(k.id) || k;
   try {
     await put('kumaslar', { ...now, fiyatlar: (now.fiyatlar || []).map(x => (priceKey(x) === key ? { ...x, silindi: stamp() } : x)), guncelleme: stamp() });
