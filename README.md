@@ -23,6 +23,5 @@ Sadece ekranları denemek için: `build.ps1 -WebOnly` sonra `node tools/serve.js
 
 ## Önemli
 
-- `android/satis.keystore` uygulamanın imza dosyasıdır. Güncellemelerin telefondaki
-  verileri koruyarak kurulabilmesi için her sürümün **aynı** dosyayla imzalanması gerekir.
+- `android/satis.keystore` yerel imza dosyasıdır. Dosya yoksa `build.ps1` ilk derlemede oluşturur; sonraki güncellemelerde telefondaki verileri korumak için **aynı** dosyayı sakla.
 - Sürüm numarası (`-VersionCode`) her yeni kurulumda artmalıdır.
