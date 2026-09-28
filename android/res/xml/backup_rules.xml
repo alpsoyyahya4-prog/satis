@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Android 11 and older: Google cloud backup (25 MB per app) carries the main data file and settings. -->
 <full-backup-content>
-    <include domain="file" path="cariler.json" />
+    <include domain="file" path="satis.json" />
     <include domain="file" path="yedekler" />
     <include domain="sharedpref" path="." />
 </full-backup-content>
