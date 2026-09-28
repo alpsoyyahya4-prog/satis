@@ -6,7 +6,7 @@
     <style name="AppTheme" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:windowBackground">@color/icon_bg</item>
         <item name="android:windowSplashScreenBackground">@color/icon_bg</item>
-        <item name="android:colorPrimary">#24337F</item>
+        <item name="android:colorPrimary">#0B4650</item>
         <item name="android:colorAccent">#0F766E</item>
         <item name="android:statusBarColor">@color/icon_bg</item>
         <item name="android:navigationBarColor">@color/icon_bg</item>
