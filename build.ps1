@@ -59,7 +59,7 @@ if (-not (Test-Path $ks)) {
     Run 'keytool' @('-genkeypair', '-keystore', $ks, '-alias', 'satis', '-keyalg', 'RSA', '-keysize', '2048', '-validity', '36500',
         '-storepass', 'satis-app', '-keypass', 'satis-app', '-dname', 'CN=Satis, O=Satis, C=TR')
 }
-$apk = Join-Path $root 'Satış.apk'
+$apk = Join-Path $root 'Satis.apk'
 Run "$bt\apksigner.bat" @('sign', '--ks', $ks, '--ks-pass', 'pass:satis-app', '--key-pass', 'pass:satis-app', '--out', $apk, "$apkDir\aligned.apk")
 Run "$bt\apksigner.bat" @('verify', $apk)
 Write-Host ("apk  -> {0} ({1} KB)" -f $apk, [math]::Round((Get-Item $apk).Length / 1KB))
