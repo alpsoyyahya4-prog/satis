@@ -32,7 +32,7 @@ function viewAyarlar() {
         <button class="btn wide" type="button" data-act="bk-restore">Yedekten yükle</button>
       </div>
     </section>
-    <p class="note-sm">Her değişiklik anında telefona kaydedilir ve yedekler hiç silinmez.${inf.mirrorPath ? ` Ayrıca ${esc(inf.mirrorPath)} klasöründe güncel yedek ve her ayın arşivi durur; uygulama silinse bile kalır.` : ''}</p>`;
+    <p class="note-sm">Her değişiklik anında telefona kaydedilir ve yedekler hiç silinmez. Başarılı dış yedeklemelerde bildirim gelir.${inf.mirrorPath ? ` Ayrıca ${esc(inf.mirrorPath)} klasöründe güncel yedek ve her ayın arşivi durur; uygulama silinse bile kalır.` : ''}</p>`;
     if (inf.canShare) transfer = `<div class="sec"><h2>Telefon değiştirme</h2></div><section class="card">
       <div class="meta" style="margin:0">Uygulamayı ve bütün kayıtlarını yeni telefona tek seferde gönder.</div>
       <div class="btn-row"><button class="btn primary wide" type="button" data-act="transfer">Yeni telefona gönder</button></div>
