@@ -2,7 +2,7 @@
 <!-- Android 12+: the cloud copy stays small (main data + settings); a phone-to-phone transfer brings every backup too. -->
 <data-extraction-rules>
     <cloud-backup>
-        <include domain="file" path="cariler.json" />
+        <include domain="file" path="satis.json" />
         <include domain="file" path="yedekler" />
         <include domain="sharedpref" path="." />
     </cloud-backup>
