@@ -11,3 +11,4 @@ telefon-yedekleri/
 # baska proje: bu depoya dahil degil
 ders-platformu/
 *.idsig
+\n# Satış imza anahtarı yerelde tutulur\nandroid/satis.keystore\n
