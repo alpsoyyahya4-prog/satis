@@ -55,7 +55,7 @@ import java.util.zip.GZIPOutputStream;
  * Hosts the Cariler web UI (assets/index.html) and keeps its data safe:
  *  - every save is written atomically to files/cariler.json
  *  - hourly (and before deletes/restores) gzip snapshots in files/yedekler; snapshots are never deleted
- *  - Download/Cariler: the latest copy plus one archive file per month, surviving uninstall (Android 10+)
+ *  - Download/Satış: the latest copy plus one archive file per month, surviving uninstall (Android 10+)
  *  - cariler.json goes into Android's Google backup; phone-to-phone transfer carries everything
  */
 public class MainActivity extends Activity {
@@ -79,7 +79,7 @@ public class MainActivity extends Activity {
         super.onCreate(state);
         // denim like the system splash, so the page's own launch animation continues it seamlessly
         root = new FrameLayout(this);
-        root.setBackgroundColor(Color.parseColor("#24337F"));
+        root.setBackgroundColor(Color.parseColor("#0B4650"));
         web = new WebView(this);
         web.setBackgroundColor(Color.TRANSPARENT);
         root.addView(web, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
@@ -127,10 +127,10 @@ public class MainActivity extends Activity {
                 if (importWaiting) { importWaiting = false; callJs("import", pendingImport != null ? "ok" : "error", pendingImport); pendingImport = null; }
             }
         });
-        // renamed to Satış: forget the old Download/Cariler targets so new files land in the Satış folder
+        // renamed to Satış: forget the old Download/Satış targets so new files land in the Satış folder
         SharedPreferences p0 = prefs();
         if (!p0.getBoolean("renamed-satis", false)) {
-            p0.edit().remove("mirrorUri").remove("apkUri").putBoolean("renamed-maliyet", true).apply();
+            p0.edit().remove("mirrorUri").remove("apkUri").putBoolean("renamed-satis", true).apply();
         }
 
         web.addJavascriptInterface(new Bridge(), "AndroidBridge");
@@ -300,7 +300,7 @@ public class MainActivity extends Activity {
         writeGzAtomic(new File(backupDir(), "yedek-" + ts + "_" + c + "_" + k + "_" + tag + ".json.gz"), json);
     }
 
-    /** Download/Cariler keeps the latest copy and Download/Cariler/Arsiv one file per month; both stay if the app is removed. */
+    /** Download/Satış keeps the latest copy and Download/Satış/Arsiv one file per month; both stay if the app is removed. */
     private void mirror(String json) {
         if (Build.VERSION.SDK_INT < 29) return;
         synchronized (mirrorLock) {
@@ -517,7 +517,7 @@ public class MainActivity extends Activity {
             } catch (Exception e) { return false; }
         }
 
-        /** Sends the installed app (Cariler.apk) and all records together, for moving to a new phone. */
+        /** Sends the installed app (Satis.apk) and all records together, for moving to a new phone. */
         @JavascriptInterface
         public boolean shareTransfer(String content, String name) {
             if (Build.VERSION.SDK_INT < 29) return false;
@@ -530,10 +530,10 @@ public class MainActivity extends Activity {
                 Uri apk = null;
                 String saved = p.getString("apkUri", null);
                 if (saved != null) {
-                    try { apk = writeDownload("Satış.apk", apkBytes, Uri.parse(saved), "", apkMime); } catch (Exception e) { apk = null; }
+                    try { apk = writeDownload("Satis.apk", apkBytes, Uri.parse(saved), "", apkMime); } catch (Exception e) { apk = null; }
                 }
                 if (apk == null) {
-                    apk = writeDownload("Satış.apk", apkBytes, null, "", apkMime);
+                    apk = writeDownload("Satis.apk", apkBytes, null, "", apkMime);
                     if (apk != null) p.edit().putString("apkUri", apk.toString()).apply();
                 }
                 if (data == null || apk == null) return false;
